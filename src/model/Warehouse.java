@@ -7,12 +7,12 @@ public class Warehouse {
     private String location;
     private int capacity;
 
-    Warehouse(int id, String location, int capacity){
+    public Warehouse(int id, String location, int capacity){
         this.ID = id;
         this.location = location;
         this.capacity = capacity;
     }
-    Warehouse(String location, int capacity){
+    public Warehouse(String location, int capacity){
         this.ID = getNextFreeID();
         this.location = location;
         this.capacity = capacity;
