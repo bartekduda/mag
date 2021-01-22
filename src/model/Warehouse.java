@@ -39,4 +39,11 @@ public class Warehouse {
     public int getCapacity() {
         return capacity;
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + getID() +
+                " location: " + getLocation()  +
+                " capacity: " + getCapacity();
+    }
 }
