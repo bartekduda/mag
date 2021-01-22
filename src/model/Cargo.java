@@ -73,6 +73,10 @@ public class Cargo {
         return arrivalDate;
     }
 
+    public void setAssignedWarehouse(int assignedWarehouse) {
+        this.assignedWarehouse = assignedWarehouse;
+    }
+
     @Override
     public String toString() {
         return "ID: " + ID +

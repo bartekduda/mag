@@ -7,10 +7,10 @@ import java.io.*;
 import java.time.LocalDate;
 
 public class CargoReadWrite {
-    private String filename = "cargo.csv";
-    private String spliter = ",";
+    private static String filename = "cargo.csv";
+    private static String spliter = ",";
 
-    public void writeCargoToFile(){
+    public static void writeCargoToFile(){
         try(PrintWriter outS = new PrintWriter(new BufferedWriter(new FileWriter(filename)))){
             for(Cargo cargo : Database.lisOfCargo){
                 outS.write(cargo.getID() + spliter + cargo.getCategory() + spliter + cargo.getDescription()
@@ -23,7 +23,7 @@ public class CargoReadWrite {
         }
     }
 
-    public void readCargoFromFile(){
+    public static void readCargoFromFile(){
         try(BufferedReader inS = new BufferedReader(new FileReader(filename))){
             int id;
             String category;
