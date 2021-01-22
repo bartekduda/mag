@@ -5,14 +5,14 @@ import utility.Database;
 public class Warehouse {
     private final int ID;
     private String location;
-    private int capacity;
+    private double capacity;
 
-    public Warehouse(int id, String location, int capacity){
+    public Warehouse(int id, String location, double capacity){
         this.ID = id;
         this.location = location;
         this.capacity = capacity;
     }
-    public Warehouse(String location, int capacity){
+    public Warehouse(String location, double capacity){
         this.ID = getNextFreeID();
         this.location = location;
         this.capacity = capacity;
@@ -36,7 +36,7 @@ public class Warehouse {
         return location;
     }
 
-    public int getCapacity() {
+    public double getCapacity() {
         return capacity;
     }
 

@@ -25,7 +25,7 @@ public class WarehouseReadWrite {
         try(BufferedReader inS = new BufferedReader(new FileReader(filepath))) {
             int id;
             String location;
-            int capacity;
+            double capacity;
             String line;
             String[] lineArray;
 
@@ -33,7 +33,7 @@ public class WarehouseReadWrite {
                 lineArray = line.split(spliter);
                 id = Integer.parseInt(lineArray[0]);
                 location = lineArray[1];
-                capacity = Integer.parseInt(lineArray[2]);
+                capacity = Double.parseDouble(lineArray[2]);
 
                 Database.listOfWarehouse.add(new Warehouse(id,location,capacity));
             }

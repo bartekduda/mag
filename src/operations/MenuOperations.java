@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class MenuOperations {
@@ -85,5 +86,53 @@ public class MenuOperations {
         }
     }
 
-    
+    public void displayCargo(){
+        for (Cargo cargo : Database.lisOfCargo){
+            System.out.println(cargo);
+        }
+    }
+
+    public void nearlyFullWarehouse(){
+        int maxCapacity;
+        for (Warehouse warehouse : Database.listOfWarehouse){
+
+        }
+    }
+
+    public void cargoByArrivalDate(){
+        int choiceWarehouse;
+        System.out.println("Which warehouse would you like to display?");
+        for(Warehouse warehouse : Database.listOfWarehouse){
+            System.out.println(warehouse);
+        }
+        choiceWarehouse = scanner.nextInt();
+        Database.lisOfCargo.sort(new Comparator<Cargo>() {
+            @Override
+            public int compare(Cargo o1, Cargo o2) {
+                LocalDate date1;
+                LocalDate date2;
+                date1 = o1.getArrivalDate();
+                date2 = o2.getArrivalDate();
+                return date1.compareTo(date2);
+            }
+        });
+        for(Cargo cargo : Database.lisOfCargo){
+            if(cargo.getAssignedWarehouse() == choiceWarehouse){
+                System.out.println(cargo);
+            }
+        }
+    }
+
+    public void cargoByCategory(){
+        String choice;
+        System.out.println("What cargo category would you like to display");
+        choice = scanner.next();
+        for (Cargo cargo : Database.lisOfCargo){
+            if(cargo.getCategory().equals(choice)){
+                System.out.println(cargo);
+            }
+        }
+    }
+
+
 }
