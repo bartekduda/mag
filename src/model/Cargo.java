@@ -35,7 +35,7 @@ public class Cargo {
         this.arrivalDate = arrivalDate;
     }
 
-    private int getNextFreeID(){
+    private static int getNextFreeID(){
         int lastID = 0;
         for(Cargo cargo : Database.lisOfCargo){
             if(cargo.getID() > lastID){

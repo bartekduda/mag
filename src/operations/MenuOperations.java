@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class MenuOperations {
     static Scanner scanner = new Scanner(System.in);
 
-    public void addCargo() {
+    public static void addCargo() {
         String category;
         String description;
         double massOfPackage;
@@ -41,13 +41,13 @@ public class MenuOperations {
             for(Cargo cargo : Database.lisOfCargo){
                 Database.lisOfCargo.add(new Cargo(category,description,massOfPackage,numberOfPackages,
                         assignedWarehouse,arrivalDate));
-                CargoReadWrite.writeCargoToFile();
+               // CargoReadWrite.writeCargoToFile();
             }
         }
 
     }
 
-    private boolean isValid(String ad){
+    private static boolean isValid(String ad){
         boolean valid;
         try{
             LocalDate.parse(ad, DateTimeFormatter.ofPattern("uuuu-MM-dd")
@@ -61,7 +61,7 @@ public class MenuOperations {
         return valid;
     }
 
-    public void moveCargo(){
+    public static void moveCargo(){
         int choiceCargo;
         int choiceWarehouse;
         System.out.println("Which cargo would you like to move?");
@@ -78,7 +78,7 @@ public class MenuOperations {
         moving(choiceCargo,choiceWarehouse);
 
     }
-    private void moving(int choiceCargo, int choiceWarehouse){
+    private static void moving(int choiceCargo, int choiceWarehouse){
         for(Cargo cargo : Database.lisOfCargo){
             if(cargo.getID() == choiceCargo){
                 cargo.setAssignedWarehouse(choiceWarehouse);
@@ -86,20 +86,41 @@ public class MenuOperations {
         }
     }
 
-    public void displayCargo(){
+    public static void displayCargo(){
         for (Cargo cargo : Database.lisOfCargo){
             System.out.println(cargo);
         }
     }
 
-    public void nearlyFullWarehouse(){
-        int maxCapacity;
-        for (Warehouse warehouse : Database.listOfWarehouse){
+    public static void nearlyFullWarehouse(){
+        double usedCapacity;
+        for(Cargo cargo : Database.lisOfCargo){
+            for(Warehouse warehouse : Database.listOfWarehouse){
+                if(warehouse.getID() == cargo.getAssignedWarehouse()){
+                    usedCapacity = cargo.getMassOfPackage() * cargo.getNumberOfPackages();
+                    if(((usedCapacity / 80)*100) >= warehouse.getCapacity()){
+                        System.out.println(warehouse);
+                    }
+                }
+            }
 
         }
     }
+public static void nearllyEmptyWarehouse(){
+    double usedCapacity;
+    for(Cargo cargo : Database.lisOfCargo){
+        for(Warehouse warehouse : Database.listOfWarehouse){
+            if(warehouse.getID() == cargo.getAssignedWarehouse()){
+                usedCapacity = cargo.getMassOfPackage() * cargo.getNumberOfPackages();
+                if(((usedCapacity / 20)*100) <= warehouse.getCapacity()){
+                    System.out.println(warehouse);
+                }
+            }
+        }
 
-    public void cargoByArrivalDate(){
+    }
+}
+    public static void cargoByArrivalDate(){
         int choiceWarehouse;
         System.out.println("Which warehouse would you like to display?");
         for(Warehouse warehouse : Database.listOfWarehouse){
@@ -123,7 +144,7 @@ public class MenuOperations {
         }
     }
 
-    public void cargoByCategory(){
+    public static void cargoByCategory(){
         String choice;
         System.out.println("What cargo category would you like to display");
         choice = scanner.next();
@@ -133,6 +154,4 @@ public class MenuOperations {
             }
         }
     }
-
-
 }

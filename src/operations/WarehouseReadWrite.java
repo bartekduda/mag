@@ -6,10 +6,10 @@ import utility.Database;
 import java.io.*;
 
 public class WarehouseReadWrite {
-    private String filepath = "warehouse.csv";
-    private String spliter = ",";
+    private static String filepath = "warehouse.csv";
+    private static String spliter = ",";
 
-    public void warehouseWriteToFile(){
+    public static void warehouseWriteToFile(){
         try(PrintWriter outS = new PrintWriter(new BufferedWriter(new FileWriter(filepath)))) {
             for(Warehouse warehouse : Database.listOfWarehouse){
                 outS.write(warehouse.getID() + spliter + warehouse.getLocation()
@@ -21,7 +21,7 @@ public class WarehouseReadWrite {
         }
     }
 
-    public void warehouseReadFromFile(){
+    public static void warehouseReadFromFile(){
         try(BufferedReader inS = new BufferedReader(new FileReader(filepath))) {
             int id;
             String location;
